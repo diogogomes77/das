@@ -13,17 +13,12 @@ import java.util.Date;
  *
  * @author diogo
  */
-public class ChamadaPromo10porcento extends Chamada{
-    
-    //private Date utilDate = formatter.parse(year + "/" + month);
-
+public class ChamadaPromo10porcento extends Chamada {
 
     public ChamadaPromo10porcento(Utilizador u, int destinatario, Date data, int duracao) throws ParseException {
         super(u, destinatario, data, duracao);
-            System.out.println("in custo 0");
-            this.tarifario = new TarifarioDecoradorCusto0(u.tarifario);
-        }
-        
+        System.out.println("in 10 porcento");
+        this.setTarifario(new TarifarioDecorador10porcento(u.tarifario));
     }
-   
+
 }
