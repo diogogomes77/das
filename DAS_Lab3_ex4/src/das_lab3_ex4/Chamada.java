@@ -35,11 +35,6 @@ public abstract class Chamada {
         this.duracao = duracao;
         this.origem = u.numero;
         this.destinatario = destinatario;
-
-       // this.custo = tarifario.calculaPreco(duracao);
-        //Itax adaptadorIva = new AdaptadorMaxtax();
-      //  Itax adaptadorIva = new AdaptadorSuperIVA();
-      //  this.iva = adaptadorIva.getIva(this.custo);
     }
 
     public double getIva() {
@@ -52,8 +47,8 @@ public abstract class Chamada {
         Itax adaptadorIva = new AdaptadorSuperIVA();
         iva = adaptadorIva.getIva(custo);
     }
+    
     public double custoChamada() {
-        
         return custo;
     }
 
