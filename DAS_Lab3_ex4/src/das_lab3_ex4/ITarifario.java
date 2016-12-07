@@ -5,10 +5,6 @@
  */
 package das_lab3_ex4;
 
-/**
- *
- * @author diogo
- */
 public interface ITarifario {
     public double calculaPreco(int tempoSegundos);
 }

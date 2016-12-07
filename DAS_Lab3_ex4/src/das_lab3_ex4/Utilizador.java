@@ -15,20 +15,22 @@ import java.util.List;
 public class Utilizador {
     Tarifario tarifario;
     int numero;
-    ArrayList<Integer> amigos;
+    ArrayList<Integer> lista0;
     public Utilizador(Tarifario t, int numero) {
         this.tarifario = t;
         this.numero=numero;
-        this.amigos = new ArrayList<>();
+        this.lista0 = new ArrayList<>();
         
     }
-    public void addAmigo(int numero){
-        if (amigos.size()<3){
-            amigos.add(numero);
+    public void addNumLista0(int numero){
+        if (lista0.size()<3){
+            lista0.add(numero);
         }
     }
-    public ArrayList<Integer> getAmigos(){
-        return amigos;
+
+
+    public ArrayList<Integer> getNumsLista(){
+        return lista0;
     }
 
 }

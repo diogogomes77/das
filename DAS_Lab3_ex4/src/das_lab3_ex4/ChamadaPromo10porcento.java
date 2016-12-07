@@ -20,5 +20,6 @@ public class ChamadaPromo10porcento extends Chamada {
         System.out.println("in 10 porcento");
         this.setTarifario(new TarifarioDecorador10porcento(u.tarifario));
     }
+    
 
 }
