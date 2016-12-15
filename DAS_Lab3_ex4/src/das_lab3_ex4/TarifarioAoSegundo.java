@@ -12,10 +12,10 @@ package das_lab3_ex4;
 public class TarifarioAoSegundo extends Tarifario{
     
     @Override
-    public double calculaPreco(int tempoSegundos) {
+    public double getPreco(Chamada c) {
         //  custo 1 cêntimo por segundo.
         custo = 0.01;
-        return tempoSegundos*custo;
+        return c.getDuracao()*custo;
     }
     
 }

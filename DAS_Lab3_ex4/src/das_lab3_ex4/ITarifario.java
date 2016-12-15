@@ -6,5 +6,5 @@
 package das_lab3_ex4;
 
 public interface ITarifario {
-    public double calculaPreco(int tempoSegundos);
+    public double getPreco(Chamada c);
 }

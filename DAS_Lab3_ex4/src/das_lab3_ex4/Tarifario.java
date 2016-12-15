@@ -13,6 +13,4 @@ public abstract class Tarifario implements ITarifario {
     
     protected double custo;
 
-
-    
 }

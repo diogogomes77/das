@@ -12,10 +12,11 @@ package das_lab3_ex4;
 public class TarifarioEspecial extends Tarifario{
 
     @Override
-    public double calculaPreco(int duracao) {
+    public double getPreco(Chamada c) {
         this.custo = 0.60;
-        //int duracao = chamada.duracao;
+        int duracao = c.getDuracao();
       // primeiros 20 segundos grátis, 60 cêntimos por minuto a partir daí.
+      
       if (duracao>19){
           duracao = duracao-20;
       }

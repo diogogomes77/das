@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public abstract class Chamada {
+public class  Chamada {
 
     private Utilizador utilizador;
     private int origem;
@@ -19,7 +19,9 @@ public abstract class Chamada {
 
     private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-    private static List<CampanhaTemplate> campanhas = new ArrayList<CampanhaTemplate>();;
+    private static List<CampanhaTemplateDecorador> campanhas = new ArrayList<CampanhaTemplateDecorador>();
+
+    ;
 
     public int getOrigem() {
         return origem;
@@ -28,26 +30,30 @@ public abstract class Chamada {
     public int getDestinatario() {
         return destinatario;
     }
-    
-    public static void addCampanha(CampanhaTemplate c){
+
+    public static void addCampanha(CampanhaTemplateDecorador c) {
         campanhas.add(c);
     }
-    public static List<CampanhaTemplate> getCampanhas(){
+
+    public List<CampanhaTemplateDecorador> getCampanhas() {
         return campanhas;
     }
-    public static Chamada criaChamada(Utilizador u, int destinatario, Date data, int duracao) throws ParseException {
-//        campanhas.forEach((action) -> {
-//        if (action.criterio(this) return new action());
-//    }
-        if (duracao / 60 > 10) {
-            return new ChamadaPromo10porcento(u, destinatario, data, duracao);
-        }
-        if (u.getNumsLista().contains(destinatario) && checkPromo(data)) {
-            return new ChamadaPromoCusto0(u, destinatario, data, duracao);
-        }
-        return new ChamadaNormal(u, destinatario, data, duracao);
+
+    public static Chamada getChamada(Utilizador u, int destinatario, Date data, int duracao) throws ParseException {
+
+        Chamada c = new Chamada(u, destinatario, data, duracao);
+        c.setTarifario(u.tarifario);
+        campanhas.forEach((campanha) -> {
+            if (campanha.criterio(c)) {
+                //cm = new campanha.getTarifario(c.tarifario);
+                c.setTarifario(campanha.getCampanha(c.tarifario));
+            }
+
+        });
+        return c;
 
     }
+
     public int getDuracao() {
         return duracao;
     }
@@ -55,7 +61,7 @@ public abstract class Chamada {
     public Utilizador getUtilizador() {
         return utilizador;
     }
-    
+
     protected Chamada(Utilizador u, int destinatario, Date data, int duracao) throws ParseException {
         this.utilizador = u;
         this.data = data;
@@ -67,9 +73,10 @@ public abstract class Chamada {
     public double getIva() {
         return this.iva;
     }
-    protected void setTarifario(ITarifario tarifario){
+
+    protected void setTarifario(ITarifario tarifario) {
         this.tarifario = tarifario;
-        custo = tarifario.calculaPreco(duracao);
+        custo = tarifario.getPreco(this);
         //Itax adaptadorIva = new AdaptadorMaxtax();
         Itax adaptadorIva = new AdaptadorSuperIVA();
         iva = adaptadorIva.getIva(custo);
@@ -78,10 +85,9 @@ public abstract class Chamada {
     public Date getData() {
         return data;
     }
-    
+
     public double custoChamada() {
         return custo;
     }
-
 
 }

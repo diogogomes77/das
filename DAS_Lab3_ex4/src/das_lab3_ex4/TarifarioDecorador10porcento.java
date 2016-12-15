@@ -10,10 +10,11 @@ public class TarifarioDecorador10porcento extends TarifarioDecorador {
         super.tarifario.custo = custoDecorado;
     }
     @Override
-    public double calculaPreco(int tempoSegundos) {
+    public double getPreco(Chamada c) {
         //  O custo é reduzido em 10% para chamadas superiores a 10 minutos, independentemente do tarifário.
-        double preco = tarifario.calculaPreco(tempoSegundos);
-        if (tempoSegundos/60>10){
+        double preco = tarifario.getPreco(c);
+        
+        if (c.getDuracao()/60>10){
             preco = preco - preco * 10/100;
         }
         return preco;

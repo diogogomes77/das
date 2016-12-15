@@ -17,7 +17,7 @@ public class TarifarioDecoradorCusto0 extends TarifarioDecorador{
         super(tarifario);
     }
     @Override
-    public double calculaPreco(int tempoSegundos) {
+    public double getPreco(Chamada c) {
         //  Os clientes podem escolher 2 números para o qual têm chamadas a custo 0.
         return 0;
     }
